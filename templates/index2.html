@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="{% url 'index' %}">Home</a>
+    <a href="{% url 'add_new' %}">Add New</a>
+    <form method="POST" action="{% url 'index' %}">
+        {% csrf_token %}
+        <input type="search" placeholder="Search new" name="searched">
+        <button type="submit" >search</button>
+    </form>
+    {% for new in news %}
+    <div class="div">
+        <h2>{{ new.title }}</h2>
+        <p>Published at: {{ new.publication_datetime }}</p>
+        <p>New origin: {{ new.country }}</p>
+        <img src="{{ new.new_img_url }}" alt="New Image" width="500px" height="400px">
+        <p>{{new.description}}</p>
+        <p><a href="{{ new.complete_new_url }}">Read the full article: </a></p>
+        <hr>
+    </div>
+    {% endfor %}
+</body>
+</html>

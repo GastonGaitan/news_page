@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Noticias</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+      *{
+        font-family: monospace;
+        color: white;
+      }
+
+
+      h1, h5 {
+        color: rgb(24, 128, 15);
+      }
+
+      body{
+        background-color: rgb(25, 23, 23);
+      }
+        .bg-light {
+  background-color: #2f3f52 !important;
+}
+      .card-body {
+        padding: 20px;
+        border-radius: 30px;
+      }
+
+      img {
+        border-radius: 10px;
+        margin-bottom: 10px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" style="color: rgb(24, 128, 15);" href="#">&lt;!-- Tecnews.something --!&gt;</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="{% url 'index' %}">Inicio</a></li>
+          <li><a href="{% url 'add_new' %}">Agregar Noticia</a></li>
+        </ul>
+        <form class="navbar-form navbar-left" method="POST" action="{% url 'index' %}">
+          {% csrf_token %}
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Insert new key word..." name="searched">
+            <button type="submit" class="btn btn-default">Search</button>
+          </div>
+          
+        </form>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="d-flex justify-content-center">
+        <div>
+          <h1 class="text-center">&lt;!-- Tecnews.something --!&gt;</h1>
+          <br>
+          <h5 class="text-center">&lt;!-- News website created with Django. This page is updated daily and consumes information from an API. You can also add your own news, which will be displayed on the page for 24 hours. --!&gt;</h5>
+        </div>
+      </div>
+      <div class="card bg-secondary">
+        {% for new in news %}
+          <div class="card-body bg-light">
+            <h3 class="card-title" {% comment %}style="color: {{ colors|cycle:forloop.counter0 }};" {% endcomment %}>{{ new.title }}</h3>
+            <h6 class="card-subtitle mb-2 text-muted">{{ new.publication_datetime }}</h6>
+            <img class="card-img-top" src="{{ new.new_img_url }}" alt="Imagen de noticia" width="200px" height="150px">
+            <p class="card-text">{{new.description}}</p>
+            <h3><a href="{{ new.complete_new_url }}" class="card-link" target="_blank">Seguir leyendo</a></h3>
+          </div>
+          {% if not forloop.last %}
+            <hr>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </body>
+</html>

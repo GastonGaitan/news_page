@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Add{% endblock %}
+{% block content %}
+<body>
+    <div class="container">
+    <div class="d-flex justify-content-center">
+        <div>
+          <h1 class="text-center">&lt;!-- Add a new. --!&gt;</h1>
+          <br>
+          <h5 class="text-center">&lt;!-- You can let the community to know about anything you want. --!&gt;</h5>
+        </div>
+    </div>
+    {% if submitted %}
+        Your new was submitted subccessfully!
+    {% else %}
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }} 
+            <input type="submit" value="Submit">
+        </form>
+    {% endif %}
+    </div>
+</body>
+{% endblock %}

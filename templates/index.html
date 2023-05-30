@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Home page{% endblock %}
+{% block content %}
+  <div class="container">
+    <div class="d-flex justify-content-center">
+      <div>
+        <h1 class="text-center">&lt;!-- Tecnews.something --!&gt;</h1>
+        <br>
+        <h5 class="text-center">&lt;!-- News website created with Django. This page is updated daily and consumes information from an API. You can also add your own news, which will be displayed on the page for 24 hours. --!&gt;</h5>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 d-flex justify-content-center align-items-center">
+          <form class="navbar-form" method="POST" action="{% url 'index' %}">
+            {% csrf_token %}
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Insert new key word..." name="searched">
+              <button type="submit" class="btn btn-default">Search</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>       
+    <br>
+    <div class="card bg-secondary">
+      {% for new in news %}
+        <div class="card-body bg-light">
+          <h3 class="card-title" {% comment %}style="color: {{ colors|cycle:forloop.counter0 }};" {% endcomment %}>{{ new.title }}</h3>
+          <h6 class="card-subtitle mb-2 text-muted">{{ new.publication_datetime }}</h6>
+          <img class="card-img-top" src="{{ new.new_img_url }}" alt="Imagen de noticia" width="200px" height="150px">
+          <p class="card-text">{{new.description}}</p>
+          <h3><a href="{{ new.complete_new_url }}" class="card-link" target="_blank">Seguir leyendo</a></h3>
+        </div>
+        {% if not forloop.last %}
+          <hr>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

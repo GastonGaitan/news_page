@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Noticias</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>{% block title %}{% endblock %}</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+
+      *{
+        font-family: monospace;
+        color: white;
+      }
+
+
+      h1, h5 {
+        color: rgb(24, 128, 15);
+      }
+
+      body{
+        background-color: rgb(25, 23, 23);
+      }
+        .bg-light {
+  background-color: #2f3f52 !important;
+}
+      .card-body {
+        padding: 20px;
+        border-radius: 30px;
+      }
+
+      img {
+        border-radius: 10px;
+        margin-bottom: 10px;
+      }
+
+      .form-control {
+    border-radius: 10px;
+    
+  }
+  
+  .btn {
+    border-radius: 10px;
+  }
+
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" style="color: rgb(24, 128, 15);" href="{% url 'index' %}">&lt;!-- Tecnews.something --!&gt;</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li><a href="{% url 'index' %}">Home</a></li>
+          <li><a href="{% url 'add_new' %}">Add a new</a></li>
+        </ul>
+      </div>
+    </nav>
+    {% block content %}
+    {% endblock %}
+  </body>
+</html>
